@@ -1,0 +1,370 @@
+you.com
+1)
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <algorithm>
+
+// Function to find the greatest common divisor (GCD)
+int gcd(int a, int b) {
+    if (b == 0) {
+        return a;
+    }
+    return gcd(b, a % b);
+}
+
+// Function to find the least common multiple (LCM)
+int lcm(int a, int b) {
+    return (a * b) / gcd(a, b);
+}
+
+int main() {
+    srand(time(0)); // Seed for random number generation
+
+    int A[10];
+
+    // Fill the array A with random numbers in the interval [-10, 20]
+    for (int i = 0; i < 10; ++i) {
+        A[i] = rand() % 31 - 10;
+    }
+
+    // Find the uneven-indexed maximum and even-indexed minimum
+    int maxUneven = A[1];
+    int minEven = A[0];
+    for (int i = 2; i < 10; i += 2) {
+        if (A[i] > maxUneven) {
+            maxUneven = A[i];
+        }
+    }
+    for (int i = 1; i < 10; i += 2) {
+        if (A[i] < minEven) {
+            minEven = A[i];
+        }
+    }
+
+    // Find the least common multiple and greatest common divisor of the members
+    int leastCommonMultiple = lcm(maxUneven, minEven);
+    int greatestCommonDivisor = gcd(maxUneven, minEven);
+
+    // Replace the uneven-indexed maximum member with the least common multiple
+    for (int i = 1; i < 10; i += 2) {
+        if (A[i] == maxUneven) {
+            A[i] = leastCommonMultiple;
+            break;
+        }
+    }
+
+    // Print the resulting array
+    std::cout << "Resulting array after replacements: ";
+    for (int i = 0; i < 10; ++i) {
+        std::cout << A[i] << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+
+
+
+2)
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    vector<int> numbers;
+
+    for (int i = 100000; i < 1000000; ++i) {
+        int firstThree = i / 1000;
+        int lastThree = i % 1000;
+
+        if (firstThree == lastThree) {
+            numbers.push_back(i);
+            cout << i << endl;
+        }
+    }
+
+    cout << "Total Count: " << numbers.size() << endl;
+
+    return 0;
+}
+
+
+
+----------------------------------------
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+bool isEqualFirstAndLastThreeDigits(int number) {
+    string numStr = to_string(number);
+    return numStr.substr(0, 3) == numStr.substr(3, 3);
+}
+
+int main() {
+    vector<int> numbers;
+
+    for (int i = 100000; i < 1000000; i++) {
+        if (isEqualFirstAndLastThreeDigits(i)) {
+            numbers.push_back(i);
+        }
+    }
+
+    sort(numbers.begin(), numbers.end());
+
+    cout << "Six-digit numbers with equal first and last three digits:" << endl;
+    for (int num : numbers) {
+        cout << num << endl;
+    }
+
+    cout << "**Quantity of numbers:** " << numbers.size() << endl;
+
+    return 0;
+}
+
+
+
+chargpt
+
+1)
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
+
+using namespace std;
+
+// Function to find the least common multiple (LCM) of two numbers
+int findLCM(int a, int b) {
+    return (a * b) / __gcd(a, b);
+}
+
+// Function to find the greatest common divisor (GCD) of two numbers
+int findGCD(int a, int b) {
+    if (b == 0)
+        return a;
+    return findGCD(b, a % b);
+}
+
+int main() {
+    srand(time(0)); // Seed the random number generator
+
+    int A[10];
+
+    // Fill the array with random numbers in the interval [-10, 20]
+    for (int i = 0; i < 10; ++i) {
+        A[i] = rand() % 31 - 10;
+    }
+
+    // Find the maximum among uneven-indexed elements and minimum among even-indexed elements
+    int maxUneven = A[1];
+    int minEven = A[0];
+    for (int i = 2; i < 10; i += 2) {
+        if (A[i] > maxUneven) {
+            maxUneven = A[i];
+        }
+    }
+    for (int i = 1; i < 10; i += 2) {
+        if (A[i] < minEven) {
+            minEven = A[i];
+        }
+    }
+
+    // Find the least common multiple (LCM) and greatest common divisor (GCD) of these numbers
+    int lcm = findLCM(maxUneven, minEven);
+    int gcd = findGCD(maxUneven, minEven);
+
+    // Replace the uneven-indexed maximum member with the LCM
+    for (int i = 1; i < 10; i += 2) {
+        if (A[i] == maxUneven) {
+            A[i] = lcm;
+            break;
+        }
+    }
+
+    // Print the resulting array
+    cout << "Original Array: ";
+    for (int i = 0; i < 10; ++i) {
+        cout << A[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+-------------------------------------------
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
+
+using namespace std;
+
+// Function to find the least common multiple (LCM) of two numbers
+int calculateLCM(int num1, int num2) {
+    return (num1 * num2) / __gcd(num1, num2);
+}
+
+// Function to find the greatest common divisor (GCD) of two numbers
+int calculateGCD(int num1, int num2) {
+    if (num2 == 0)
+        return num1;
+    return calculateGCD(num2, num1 % num2);
+}
+
+int main() {
+    srand(time(0)); // Seed the random number generator
+
+    int array[10];
+
+    // Fill the array with random numbers in the interval [-10, 20]
+    for (int i = 0; i < 10; ++i) {
+        array[i] = rand() % 31 - 10;
+    }
+
+    // Find the maximum among uneven-indexed elements and minimum among even-indexed elements
+    int maxOddIndex = array[1];
+    int minEvenIndex = array[0];
+    for (int i = 2; i < 10; i += 2) {
+        if (array[i] > maxOddIndex) {
+            maxOddIndex = array[i];
+        }
+    }
+    for (int i = 1; i < 10; i += 2) {
+        if (array[i] < minEvenIndex) {
+            minEvenIndex = array[i];
+        }
+    }
+
+    // Calculate the least common multiple (LCM) and greatest common divisor (GCD) of these numbers
+    int lcm = calculateLCM(maxOddIndex, minEvenIndex);
+    int gcd = calculateGCD(maxOddIndex, minEvenIndex);
+
+    // Replace the uneven-indexed maximum member with the LCM
+    for (int i = 1; i < 10; i += 2) {
+        if (array[i] == maxOddIndex) {
+            array[i] = lcm;
+            break;
+        }
+    }
+
+    // Print the resulting array
+    cout << "Original Array: ";
+    for (int i = 0; i < 10; ++i) {
+        cout << array[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
+-----------------------------------------------------
+
+2)
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    vector<int> sixDigitNumbers;
+
+    // Loop through all possible six-digit numbers
+    for (int i = 100000; i <= 999999; ++i) {
+        // Extract the first three digits
+        int firstThree = i / 1000;
+        // Extract the last three digits
+        int lastThree = i % 1000;
+        // Check if the first three and last three digits are equal
+        if (firstThree == lastThree) {
+            sixDigitNumbers.push_back(i);
+        }
+    }
+
+    // Print the six-digit numbers and their quantity
+    cout << "Six-digit numbers where first three and last three digits are equal:" << endl;
+    for (int num : sixDigitNumbers) {
+        cout << num << endl;
+    }
+    cout << "Total count: " << sixDigitNumbers.size() << endl;
+
+    return 0;
+}
+
+------------------------------
+
+
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    vector<int> sixDigitNumbers;
+
+    // Iterate through all six-digit numbers
+    for (int number = 100000; number <= 999999; ++number) {
+        // Extract the first three digits
+        int firstThreeDigits = number / 1000;
+        // Extract the last three digits
+        int lastThreeDigits = number % 1000;
+        
+        // Check if the first three and last three digits are equal
+        if (firstThreeDigits == lastThreeDigits) {
+            // If they are, add the number to the list
+            sixDigitNumbers.push_back(number);
+        }
+    }
+
+    // Print the list of six-digit numbers and their total count
+    cout << "Six-digit numbers where the first three digits match the last three digits:" << endl;
+    for (int num : sixDigitNumbers) {
+        cout << num << endl;
+    }
+    cout << "Total count: " << sixDigitNumbers.size() << endl;
+
+    return 0;
+}
+
+-----------------------------
+
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    vector<int> sixDigitNumbers(900000); // Reserve space for all possible six-digit numbers
+
+    // Generate six-digit numbers where the first three digits match the last three digits
+    int start = 100000; // Smallest six-digit number
+    generate(sixDigitNumbers.begin(), sixDigitNumbers.end(), [&start]() {
+        return start++;
+    });
+
+    // Filter out the generated numbers that match the condition
+    sixDigitNumbers.erase(
+        remove_if(sixDigitNumbers.begin(), sixDigitNumbers.end(), [](int number) {
+            int firstThreeDigits = number / 1000;
+            int lastThreeDigits = number % 1000;
+            return firstThreeDigits != lastThreeDigits;
+        }),
+        sixDigitNumbers.end()
+    );
+
+    // Print the six-digit numbers and their total count
+    cout << "Six-digit numbers where the first three digits match the last three digits:" << endl;
+    for (int num : sixDigitNumbers) {
+        cout << num << endl;
+    }
+    cout << "Total count: " << sixDigitNumbers.size() << endl;
+
+    return 0;
+}
